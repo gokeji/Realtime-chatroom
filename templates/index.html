@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gao's Chatroom</title>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap-responsive.min.css" />
+	<link rel="stylesheet" type="text/css" href="public/base.css" />
+
+</head>
+<body>
+	<div class="container-fluid"><div class="row-fluid">
+		<div  id="rooms-container" class="">
+			<a class="btn" href="/newRoom">Create New Room</a>
+			<div id="rooms-div">
+				<h3>Active Rooms:</h3>
+				<div class="btn-group btn-group-vertical">
+					{{#rooms}}
+					<a href="/{{room}}" class="btn">{{room}}</a>
+					{{/rooms}}
+				</div>
+			</div>
+		</div>
+	</div></div>
+</body>
+</html>

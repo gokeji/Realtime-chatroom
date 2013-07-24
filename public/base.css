@@ -1,0 +1,125 @@
+li{
+	list-style: none;
+}
+
+html{
+	position: fixed;
+	height: 100%;
+	width: 100%;
+}
+
+body{
+	height: 100%;
+	width: 100%;
+	min-width: 900px;
+}
+
+.row-fluid{
+	height: 100%;
+}
+
+#container{
+	background-color: #303030;
+	padding: 30px;
+	margin: 0px 30px;
+	border-radius: 30px;
+	height: 80%;
+}
+
+#message-container{
+	background-color: #D8D8D8;
+	padding: 10px;
+	border-radius: 10px;
+	height: 100%;
+}
+
+#message-div{
+	height: 90%;
+	overflow-y: scroll;
+	padding: 10px;
+	font-size: 15px;
+}
+
+#membership-container{
+	background-color: #FF7F50;
+	padding: 10px;
+	border-radius: 10px;
+	height: 100%;
+}
+
+#members{
+	padding: 10px;
+}
+
+#members li{
+	font-size: 20px;
+	list-style: circle;
+}
+
+#messageForm{
+	margin: 5px;
+}
+
+.center{
+	text-align: center;
+}
+
+#welcome-message{
+	margin: 20px;
+}
+
+#message-div li{
+	float: left;
+	clear: both;
+	width: 100%;
+}
+
+.nickname{
+	width: 10%;
+	float: left;
+	clear: both;
+	font-size: 18px;
+}
+
+.message{
+	width: 65%;
+	display: inline-block;
+}
+
+.time{
+	float: right;
+	width: 20%;
+}
+
+#home{
+	float: left;
+	margin-left: 50px;
+	position: absolute;
+	font-weight: bold;
+}
+
+
+
+
+#rooms-container{
+	margin: 30px auto;
+	width: 30%;
+	text-align: center;
+	background-color: #303030;
+	color: white;
+	padding: 20px;
+	border-radius: 20px;
+}
+
+#rooms-div{
+	margin: 10px;
+	margin-top: 30px;
+	padding: 10px;
+	background-color: #FF7F50;
+	border-radius: 10px;
+	font-size: 20px;
+}
+
+#rooms-div a{
+	margin: 9px 0px;
+}

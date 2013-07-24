@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Room:{{roomName}}</title>
+	<meta name="roomName" content="{{roomName}}"></meta>
+	<meta name="nickname" content="{{nickname}}"></meta>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="public/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="public/client.js"></script>
+	<link rel="stylesheet" type="text/css" href="public/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="public/base.css" />
+
+</head>
+<body>
+	<a id="home" class="btn btn-large" href="/"><i class="icon-backward"> </i> Back to Lobby</a>
+	<h1 class="center" id="welcome-message">Welcome to room {{roomName}}!</h1>
+	<div id="container" class="container-fluid"><div class="row-fluid">
+		<div id="message-container" class="span9">
+			<div id="message-div"></div>
+			<form method="POST" action="" id="messageForm" class="form-inline input-append row-fluid">
+				<input type="text" name="message" id="messageField" class="span11">
+				<input type="hidden" name="nickname" id="nicknameField" value="">
+				<button type="submit" id="messageSubmit" class="btn">Send</button>
+			</form>
+		</div>
+		<div id="membership-container" class="span3">
+			<h3 class="center"> Active Members </h3>
+			<div id="members"></div>
+		</div>
+	</div></div>
+</body>
+</html>

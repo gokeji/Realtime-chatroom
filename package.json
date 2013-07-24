@@ -1,0 +1,14 @@
+{
+	"name": "Gao's Chatroom",
+	"description": "A web-based chatroom server.",
+	"version": "0.0.1",
+	"dependencies": {
+		"express": "3.0.x",
+		"any-db": "0.3.x",
+		"pg": ">= 0.10.2",
+		"hogan.js": "2.0.x",
+		"socket.io": "0.9.x",
+		"consolidate": "0.7.x",
+		"sqlite3": "2.1.x"
+	}
+}
