@@ -13,7 +13,6 @@ var anyDB = require('any-db');
 var conn = anyDB.createConnection('sqlite3://chatroom.db');
 
 // create database
-var conn = anyDB.createConnection('sqlite3://chatroom.db');
 conn.query('CREATE TABLE IF NOT EXISTS messages(id INTEGER PRIMARY KEY AUTOINCREMENT, room TEXT, nickname TEXT,body TEXT, time INTEGER);').on('end', function(){
 		console.log('Made table!');
 });
