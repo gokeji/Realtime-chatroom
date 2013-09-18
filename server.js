@@ -13,7 +13,7 @@ var anyDB = require('any-db');
 var conn = anyDB.createConnection('sqlite3://chatroom.db');
 
 // create database
-conn.query('CREATE TABLE IF NOT EXISTS messages(id INTEGER PRIMARY KEY AUTOINCREMENT, room TEXT, nickname TEXT,body TEXT, time INTEGER);').on('end', function(){
+conn.query('CREATE TABLE IF NOT EXISTS messages(id INTEGER PRIMARY KEY AUTOINCREMENT, room TEXT, nickname TEXT,body TEXT, time TEXT);').on('end', function(){
 		console.log('Made table!');
 });
 
@@ -77,7 +77,13 @@ io.sockets.on('connection', function(socket){
         // process an incoming message (don't forget to broadcast it to everyone!)
         // var rooms = Object.keys(io.sockets.manager.roomClients[socket.id]);
         // var roomName = (rooms[0] == '') ? rooms[1].substr(1) : rooms[0].substr(1);
-        var time = new Date().toString();
+        var time = new Date();
+        time = time.getUTCFullYear() + '-' +
+            ('00' + (time.getUTCMonth()+1)).slice(-2) + '-' +
+            ('00' + time.getUTCDate()).slice(-2) + ' ' + 
+            ('00' + time.getUTCHours()).slice(-2) + ':' + 
+            ('00' + time.getUTCMinutes()).slice(-2) + ':' + 
+            ('00' + time.getUTCSeconds()).slice(-2);
 
         // send message to all members in the room
         io.sockets.in(socket.roomName).emit('message', socket.nickname, message, time);
