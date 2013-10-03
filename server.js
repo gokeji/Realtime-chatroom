@@ -52,12 +52,13 @@ app.get('/updateDateFormat', function(request, response){
 
     q.on('row', function(row){
         var time = new Date(row.time);
-        time = time.getFullYear() + '-' +
-            ('00' + (time.getMonth()+1)).slice(-2) + '-' +
-            ('00' + time.getDate()).slice(-2) + ' ' + 
-            ('00' + time.getHours()).slice(-2) + ':' + 
-            ('00' + time.getMinutes()).slice(-2) + ':' + 
-            ('00' + time.getSeconds()).slice(-2);
+        time = time.getTime();
+        // time = time.getFullYear() + '-' +
+        //     ('00' + (time.getMonth()+1)).slice(-2) + '-' +
+        //     ('00' + time.getDate()).slice(-2) + ' ' + 
+        //     ('00' + time.getHours()).slice(-2) + ':' + 
+        //     ('00' + time.getMinutes()).slice(-2) + ':' + 
+        //     ('00' + time.getSeconds()).slice(-2);
 
         id = row.id;
 
@@ -104,13 +105,14 @@ io.sockets.on('connection', function(socket){
         // process an incoming message (don't forget to broadcast it to everyone!)
         // var rooms = Object.keys(io.sockets.manager.roomClients[socket.id]);
         // var roomName = (rooms[0] == '') ? rooms[1].substr(1) : rooms[0].substr(1);
-        var time = new Date();
-        time = time.getFullYear() + '-' +
-            ('00' + (time.getMonth()+1)).slice(-2) + '-' +
-            ('00' + time.getDate()).slice(-2) + ' ' + 
-            ('00' + time.getHours()).slice(-2) + ':' + 
-            ('00' + time.getMinutes()).slice(-2) + ':' + 
-            ('00' + time.getSeconds()).slice(-2);
+        time = new Date();
+        time = time.getTime();
+        // time = time.getUTCFullYear() + '-' +
+        //     ('00' + (time.getUTCMonth()+1)).slice(-2) + '-' +
+        //     ('00' + time.getUTCDate()).slice(-2) + ' ' + 
+        //     ('00' + time.getUTCHours()).slice(-2) + ':' + 
+        //     ('00' + time.getUTCMinutes()).slice(-2) + ':' + 
+        //     ('00' + time.getUTCSeconds()).slice(-2);
 
         // send message to all members in the room
         io.sockets.in(socket.roomName).emit('message', socket.nickname, message, time);

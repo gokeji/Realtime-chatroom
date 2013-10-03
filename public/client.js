@@ -44,6 +44,9 @@ $(document).ready(function(){
             messageDiv.append('<li><span class="nickname"><b>'+message.nickname+'</b>: </span>  <span class="time">'+time +'</span><span class="message">'+message.body+'</span></li>');
         }
         $('#message-div').animate({scrollTop: $('#message-div').prop("scrollHeight")}, 500);
+
+        // put focus on input box
+        $('#messageField').focus();
     };
 
     // join the room
@@ -59,9 +62,10 @@ function sendMessage(e) {
     e.preventDefault();
 
     message = $('#messageField').val();
-
     socket.emit('message', message);
 
     // clear message field
     $('#messageField').val('');
 }
+
+
