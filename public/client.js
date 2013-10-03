@@ -41,7 +41,6 @@ $(document).ready(function(){
         for (var i = 0; i < messages.length; i++){
             message = messages[i];
             var time = new Date(message.time).toLocaleString();
-            console.log(message);
             messageDiv.append('<li><span class="nickname"><b>'+message.nickname+'</b>: </span>  <span class="time">'+time +'</span><span class="message">'+message.body+'</span></li>');
         }
         $('#message-div').animate({scrollTop: $('#message-div').prop("scrollHeight")}, 500);
