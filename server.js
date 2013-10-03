@@ -33,10 +33,10 @@ app.get('/', function(request, response){
 
 	q.on('row', function(row){
 		rooms.push(row);
-	})
+	});
 	q.on('end', function(){
 		response.render('index.html', {rooms: rooms});
-	})
+	});
 })
 
 // generating a random new room
@@ -44,11 +44,38 @@ app.get('/newRoom', function(request, response){
 	response.redirect('/'+generateRoomIdentifier());
 })
 
+
+app.get('/updateDateFormat', function(request, response){
+    //TODO update date formats
+    var sql = 'SELECT * FROM messages ORDER BY time ASC';
+    var q = conn.query(sql);
+
+    q.on('row', function(row){
+        var time = new Date(row.time);
+        time = time.getFullYear() + '-' +
+            ('00' + (time.getMonth()+1)).slice(-2) + '-' +
+            ('00' + time.getDate()).slice(-2) + ' ' + 
+            ('00' + time.getHours()).slice(-2) + ':' + 
+            ('00' + time.getMinutes()).slice(-2) + ':' + 
+            ('00' + time.getSeconds()).slice(-2);
+
+        id = row.id;
+
+        conn.query("UPDATE messages SET time=$1 WHERE id=$2", [time, id]);
+    });
+    q.on('end', function(row){
+        console.log('finished');
+        response.end('completed');
+    });
+
+})
+
 // getting a new room rendered
 app.get('/:roomName', function(request, response){
     var name = request.params.roomName;
     response.render('room.html', {roomName: name});
 });
+
 
 io.sockets.on('connection', function(socket){
     // clients emit this when they join new rooms
@@ -64,10 +91,10 @@ io.sockets.on('connection', function(socket){
 
 		q.on('row', function(row){
 			messages.push(row);
-		})
+		});
 		q.on('end', function(row){
         	callback(messages);
-		})
+		});
 
 		broadcastMembership(socket.roomName);
     });
@@ -78,12 +105,12 @@ io.sockets.on('connection', function(socket){
         // var rooms = Object.keys(io.sockets.manager.roomClients[socket.id]);
         // var roomName = (rooms[0] == '') ? rooms[1].substr(1) : rooms[0].substr(1);
         var time = new Date();
-        time = time.getUTCFullYear() + '-' +
-            ('00' + (time.getUTCMonth()+1)).slice(-2) + '-' +
-            ('00' + time.getUTCDate()).slice(-2) + ' ' + 
-            ('00' + time.getUTCHours()).slice(-2) + ':' + 
-            ('00' + time.getUTCMinutes()).slice(-2) + ':' + 
-            ('00' + time.getUTCSeconds()).slice(-2);
+        time = time.getFullYear() + '-' +
+            ('00' + (time.getMonth()+1)).slice(-2) + '-' +
+            ('00' + time.getDate()).slice(-2) + ' ' + 
+            ('00' + time.getHours()).slice(-2) + ':' + 
+            ('00' + time.getMinutes()).slice(-2) + ':' + 
+            ('00' + time.getSeconds()).slice(-2);
 
         // send message to all members in the room
         io.sockets.in(socket.roomName).emit('message', socket.nickname, message, time);
